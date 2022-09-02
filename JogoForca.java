@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class JogoForca {
@@ -16,6 +17,8 @@ public class JogoForca {
             "JABUTICABA",
             "BANANA",
             "PESSEGO",
+            "MORANGO",
+            "PERA"
         };
 
         int indicePalavraSorteada = 2;
