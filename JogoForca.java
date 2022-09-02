@@ -9,6 +9,8 @@ public class JogoForca {
 
         Scanner in = new Scanner(System.in);
 
+        Random rnd = new Random();
+
         // Configurar jogo
         String[] bancoPalavras = {
             "ABACATE",
@@ -21,7 +23,7 @@ public class JogoForca {
             "PERA"
         };
 
-        int indicePalavraSorteada = (int)Math.random()*8;
+        int indicePalavraSorteada = rnd.nextInt(bancoPalavras.length);
         int chancesRestantes = 10;
         String palavraSorteada = bancoPalavras[indicePalavraSorteada];
         int tamPalavraSorteada = palavraSorteada.length();
@@ -34,6 +36,7 @@ public class JogoForca {
 
 		// Loop do jogo
         while (chancesRestantes > 0) {
+            verificaSeGanhou(tamPalavraSorteada, letrasReveladas);
             System.out.println("\nChances restantes: " + chancesRestantes);
             
             // Mostra letras ja reveladas
@@ -52,6 +55,10 @@ public class JogoForca {
             for (int i = 0; i < tamPalavraSorteada; i++) {
                 if (letrasEscondidas[i] == letraDigitada) {
                     letraEncontrada = true;
+                    if (letraDigitada == letrasReveladas[i]){
+                        chancesRestantes--;
+                        break;
+                    }
                     letrasReveladas[i] = letrasEscondidas[i];
                 }
             }
@@ -66,6 +73,28 @@ public class JogoForca {
         System.out.println(" Game Over ");
         System.out.println("===========");
 
+    }
+
+    private static void verificaSeGanhou(int tamPalavraSorteada, char[]letrasReveladas){
+        int count = 0;
+        
+        for (int i = 0; i < tamPalavraSorteada; i++){
+            if (letrasReveladas[i] == '?'){
+                count++;
+            }
+        }
+        if (count == 0){
+
+            for (int i = 0; i < tamPalavraSorteada; i++) {
+                System.out.print(letrasReveladas[i]);
+            }
+
+            System.out.println();
+            System.out.println();
+            System.out.println("=====");
+            System.out.println(" WIN ");
+            System.out.println("=====");
+        }
     }
 
 
